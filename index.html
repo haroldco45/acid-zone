@@ -2,97 +2,475 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACID ZONE - Frutas & Gomitas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ACID ZONE - Menú Interactivo</title>
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-block">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icon-192.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Urbanist:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Urbanist:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         :root {
-            --bg-color: #0a0a0a;
-            --card-bg: #141414;
+            --bg-black: #000000;
+            --surface: #0a0a0a;
+            --card-bg: #111111;
             --acid-green: #39ff14;
-            --acid-purple: #9d00ff;
-            --text-main: #ffffff;
-            --text-muted: #a0a0a0;
+            --neon-pink: #ff007f;
+            --neon-purple: #9d00ff;
+            --acid-yellow: #e7fe00;
+            --text-light: #ffffff;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Urbanist', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            padding-bottom: 100px;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Urbanist', sans-serif; }
+        body { background-color: var(--bg-black); color: var(--text-light); padding-bottom: 120px; }
 
         header {
-            background: linear-gradient(180deg, rgba(157,0,255,0.2) 0%, rgba(0,0,0,0) 100%);
-            padding: 30px 20px;
             text-align: center;
-            border-bottom: 2px solid var(--acid-green);
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+            padding: 30px 15px;
+            background: linear-gradient(180deg, rgba(157, 0, 255, 0.15) 0%, transparent 100%);
+            border-bottom: 3px dashed var(--acid-green);
         }
 
-        .logo {
+        .main-title {
             font-family: 'Permanent Marker', cursive;
             font-size: 3.5rem;
             color: var(--acid-green);
-            text-shadow: 3px 3px var(--acid-purple);
+            text-shadow: 4px 4px var(--neon-purple);
+            line-height: 1;
             text-transform: uppercase;
-            letter-spacing: 2px;
         }
 
-        .subtitle {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--text-main);
-            margin-top: 5px;
-            font-weight: 600;
-        }
-
-        .container {
-            padding: 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .section-title {
+        .sub-title {
             font-family: 'Permanent Marker', cursive;
-            font-size: 1.8rem;
-            color: var(--text-main);
-            margin: 25px 0 15px 0;
-            border-left: 4px solid var(--acid-purple);
-            padding-left: 10px;
+            font-size: 1.6rem;
+            color: var(--text-light);
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        .badges-row {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 5px;
+            border: 1px solid var(--text-light);
+        }
+        .badge.green { color: var(--acid-green); border-color: var(--acid-green); }
+        .badge.pink { color: var(--neon-pink); border-color: var(--neon-pink); }
+
+        .container { max-width: 550px; margin: 0 auto; padding: 15px; }
+
+        .section-box {
+            background-color: var(--surface);
+            border: 1px solid #222;
+            border-radius: 18px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .section-box.green-accent { border-color: var(--acid-green); }
+        .section-box.pink-accent { border-color: var(--neon-pink); }
+
+        .section-header {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3rem;
+            color: var(--acid-green);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-header.pink { color: var(--neon-pink); }
+
+        /* Lista de Frutas */
+        .frutas-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .fruta-tag {
+            background: #151515;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .fruta-tag i { color: var(--acid-green); }
+
+        .info-text {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.4;
+            border-left: 2px solid var(--acid-green);
+            padding-left: 8px;
+        }
+        .info-text span { color: var(--acid-green); font-weight: 700; }
+
+        /* Filas de Selección Interactiva */
+        .selection-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: #161616;
+            padding: 14px 15px;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+        .selection-row.selected {
+            border-color: var(--acid-green);
+            background: rgba(57, 255, 20, 0.05);
+        }
+        .selection-row.selected-pink {
+            border-color: var(--neon-pink);
+            background: rgba(255, 0, 127, 0.05);
         }
 
-        /* Menu Items */
-        .card-grid {
-            display: grid;
-            gap: 15px;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid #222;
-            border-radius: 15px;
-            padding: 15px;
+        .check-item {
             display: flex;
-            justify-content: space-
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .check-item input { accent-color: var(--acid-green); width: 18px; height: 18px; }
+
+        .price-tag { font-family: 'Permanent Marker', cursive; font-size: 1.25rem; color: var(--acid-green); }
+        .price-tag.pink { color: var(--neon-pink); }
+
+        /* Contadores de Adiciones */
+        .addon-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px dashed #222;
+        }
+        .addon-row:last-child { border-bottom: none; }
+        .addon-info { display: flex; flex-direction: column; }
+        .addon-title { font-weight: 700; font-size: 1rem; }
+        .addon-price { font-size: 0.85rem; color: var(--acid-green); font-weight: bold; }
+
+        .counter-control { display: flex; align-items: center; gap: 12px; }
+        .btn-ctrl {
+            width: 30px; height: 30px; border-radius: 50%; border: none;
+            background: #252525; color: #fff; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+        }
+        .count-num { font-size: 1.1rem; font-weight: 900; min-width: 15px; text-align: center; }
+
+        /* Caja de Toppings */
+        .toppings-box { color: var(--acid-yellow); font-weight: 700; font-size: 0.9rem; line-height: 1.5; }
+
+        /* Localización */
+        .geo-indicator {
+            background: rgba(157, 0, 255, 0.08);
+            border: 1px dashed var(--neon-purple);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+        }
+        .geo-indicator i { font-size: 1.4rem; color: var(--acid-green); }
+
+        /* Barra Inferior */
+        .bottom-checkout {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: #000; border-top: 2px solid var(--neon-pink);
+            padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
+            z-index: 100;
+        }
+        .total-wrapper { display: flex; flex-direction: column; }
+        .total-lbl { font-size: 0.75rem; text-transform: uppercase; color: #777; font-weight: 700; }
+        .total-val { font-family: 'Permanent Marker', cursive; font-size: 1.8rem; color: var(--acid-green); }
+
+        .btn-submit {
+            background: #25D366; color: #fff; border: none; padding: 12px 24px;
+            border-radius: 25px; font-weight: 900; font-size: 1rem; text-transform: uppercase;
+            cursor: pointer; display: flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        footer {
+            text-align: center; padding: 30px 15px; margin-top: 30px;
+            font-size: 0.75rem; color: #444; border-top: 1px solid #111;
+        }
+        footer b { color: var(--acid-green); }
+
+        .pwa-banner {
+            background: var(--neon-purple); color: #fff; padding: 10px;
+            display: none; justify-content: space-between; align-items: center;
+            font-size: 0.85rem; font-weight: 700;
+        }
+        .pwa-btn { background: #fff; color: #000; border: none; padding: 4px 10px; border-radius: 5px; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="pwa-banner" id="pwaBanner">
+        <span>⚡ Instalar Menú Acid Zone en tu pantalla</span>
+        <button class="pwa-btn" id="pwaBtn">Instalar</button>
+    </div>
+
+    <header>
+        <div class="main-title">Acid Zone</div>
+        <div class="sub-title">Menú de Frutas y Gomitas</div>
+        <div class="badges-row">
+            <span class="badge green">Sabor Ácido</span>
+            <span class="badge pink">Picante</span>
+            <span class="badge green">Irresistible</span>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="section-box green-accent">
+            <div class="section-header"><i class="fa-solid fa-lemon"></i> Frutas Ácidas e Extra Ácidas</div>
+            <div class="frutas-list">
+                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Manzana</div>
+                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Fresa</div>
+                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Kiwi</div>
+                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Uva verde</div>
+                <div class="fruta-tag" style="grid-column: span 2;"><i class="fa-solid fa-circle-check"></i> Guayaba manzana</div>
+            </div>
+            <div class="info-text">
+                Estas frutas se caracterizan por su sabor <span>refrescante y ligeramente ácido</span>, perfectas para snacks deliciosos.
+            </div>
+        </div>
+
+        <div class="section-box pink-accent">
+            <div class="section-header pink"><i class="fa-solid fa-boxes-stacked"></i> Elige tu Combinación</div>
+            
+            <div class="selection-row selected" id="row-c1" onclick="selectCombo('c1', 13000, 'Combo 1 Puesto')">
+                <div class="check-item">
+                    <input type="radio" name="comboGroup" id="c1" checked>
+                    <label for="c1">⭐ 1 PUESTO</label>
+                </div>
+                <div class="price-tag">$13.000</div>
+            </div>
+
+            <div class="selection-row" id="row-c3" onclick="selectCombo('c3', 17000, 'Combo 3 Puestos')">
+                <div class="check-item">
+                    <input type="radio" name="comboGroup" id="c3">
+                    <label for="c3">⭐ 3 PUESTOS</label>
+                </div>
+                <div class="price-tag">$17.000</div>
+            </div>
+
+            <div class="selection-row" id="row-c5" onclick="selectCombo('c5', 28000, 'Combo 5 Puestos')">
+                <div class="check-item">
+                    <input type="radio" name="comboGroup" id="c5">
+                    <label for="c5">⭐ 5 PUESTOS</label>
+                </div>
+                <div class="price-tag">$28.000</div>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <div class="section-header" style="color: var(--acid-yellow);"><i class="fa-solid fa-candy-cane"></i> Gomitas + Frutas Extra Ácidas</div>
+            <div class="selection-row" id="row-bolsita" onclick="toggleBolsitaStandalone()">
+                <div class="check-item">
+                    <input type="checkbox" id="bolsitaStandalone">
+                    <label for="bolsitaStandalone">🍓 GOMITAS EN BOLSITA</label>
+                </div>
+                <div class="price-tag pink">$7.000</div>
+            </div>
+        </div>
+
+        <div class="section-box green-accent">
+            <div class="section-header"><i class="fa-solid fa-circle-plus"></i> Adiciones</div>
+            <div class="addon-row" data-name="Fruta Extra" data-price="2500">
+                <div class="addon-info">
+                    <span class="addon-title">🟢 Fruta Extra</span>
+                    <span class="addon-price">+$2.500</span>
+                </div>
+                <div class="counter-control">
+                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                    <span class="count-num">0</span>
+                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="addon-row" data-name="Topping Extra" data-price="1500">
+                <div class="addon-info">
+                    <span class="addon-title">🟢 Topping Extra</span>
+                    <span class="addon-price">+$1.500</span>
+                </div>
+                <div class="counter-control">
+                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                    <span class="count-num">0</span>
+                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="addon-row" data-name="Adiciones de Gomitas" data-price="2000">
+                <div class="addon-info">
+                    <span class="addon-title">🟢 Adiciones de Gomitas</span>
+                    <span class="addon-price">+$2.000</span>
+                </div>
+                <div class="counter-control">
+                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                    <span class="count-num">0</span>
+                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                </div>
+            </div>
+            <div class="addon-row" data-name="Gomitas en Bolsita" data-price="7000">
+                <div class="addon-info">
+                    <span class="addon-title">🟢 Gomitas en Bolsita</span>
+                    <span class="addon-price">+$7.000</span>
+                </div>
+                <div class="counter-control">
+                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                    <span class="count-num">0</span>
+                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-box pink-accent">
+            <div class="section-header pink" style="font-size: 1.1rem;"><i class="fa-solid fa-pepper-hot"></i> Toppings Activos con tus pedidos</div>
+            <div class="toppings-box">
+                • Tajín / Polvo Ácido <br>
+                • Limón Extruido <br>
+                • Salsa de la Casa
+            </div>
+        </div>
+
+        <div class="geo-indicator">
+            <i class="fa-solid fa-location-crosshairs" id="geoIcon"></i>
+            <span id="geoText">Sincronizando coordenadas de entrega...</span>
+        </div>
+
+    </div>
+
+    <div class="bottom-checkout">
+        <div class="total-wrapper">
+            <span class="total-lbl">Total + Domicilio ($3k)</span>
+            <span class="total-val" id="totalValue">$16.000</span>
+        </div>
+        <button class="btn-submit" onclick="dispatchOrder()"><i class="fa-brands fa-whatsapp"></i> Pedir</button>
+    </div>
+
+    <footer>
+        <p>Domicilios Oficiales: 323 806 8384 | Tarifa Domicilio: $3.000</p>
+        <p style="margin-top: 8px; font-weight: 700; letter-spacing: 0.3px;">Hecha por VIBRAS POSITIVAS HM</p>
+        <p>© 2026 Todos los derechos de autor reservados</p>
+    </footer>
+
+    <script>
+        let gpsCoords = "No compartida";
+        let comboPrice = 13000;
+        let comboSelectedName = "Combo 1 Puesto";
+        const COST_DOMICILIO = 3000;
+
+        window.addEventListener('load', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (p) => {
+                        gpsCoords = `https://www.google.com/maps?q=${p.coords.latitude},${p.coords.longitude}`;
+                        document.getElementById('geoIcon').className = "fa-solid fa-location-dot";
+                        document.getElementById('geoText').innerHTML = "<b>Ubicación Geo Vinculada</b> con el despacho de WhatsApp.";
+                        document.getElementById('geoText').style.color = "#39ff14";
+                    },
+                    () => { document.getElementById('geoText').innerText = "Ubicación manual mediante chat de WhatsApp."; },
+                    { enableHighAccuracy: true }
+                );
+            }
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('sw.js?v=2').then(r => console.log('SW activo'));
+            }
+        });
+
+        function selectCombo(radioId, price, name) {
+            document.getElementById(radioId).checked = true;
+            comboPrice = price;
+            comboSelectedName = name;
+            
+            ['row-c1', 'row-c3', 'row-c5'].forEach(id => document.getElementById(id).classList.remove('selected'));
+            document.getElementById('row-' + radioId).classList.add('selected');
+            updateTotal();
+        }
+
+        function toggleBolsitaStandalone() {
+            const chk = document.getElementById('bolsitaStandalone');
+            chk.checked = !chk.checked;
+            document.getElementById('row-bolsita').classList.toggle('selected-pink', chk.checked);
+            updateTotal();
+        }
+
+        function changeAddon(btn, val) {
+            const display = btn.parentElement.querySelector('.count-num');
+            let current = parseInt(display.innerText) + val;
+            if (current < 0) current = 0;
+            display.innerText = current;
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let total = comboPrice;
+            if (document.getElementById('bolsitaStandalone').checked) total += 7000;
+
+            document.querySelectorAll('.addon-row').forEach(row => {
+                const price = parseInt(row.getAttribute('data-price'));
+                const qty = parseInt(row.querySelector('.count-num').innerText);
+                total += (price * qty);
+            });
+
+            total += COST_DOMICILIO;
+            document.getElementById('totalValue').innerText = "$" + total.toLocaleString('es-CO');
+        }
+
+        function dispatchOrder() {
+            let msg = "*🧪 NUEVO PEDIDO - ACID ZONE PWA*\\n\\n";
+            msg += `• *Base:* ${comboSelectedName}\\n`;
+            if(document.getElementById('bolsitaStandalone').checked) msg += `• *Bolsita Extra:* Sí (+ $7.000)\\n`;
+            
+            let addonsStr = "";
+            document.querySelectorAll('.addon-row').forEach(row => {
+                const name = row.getAttribute('data-name');
+                const qty = parseInt(row.querySelector('.count-num').innerText);
+                if (qty > 0) addonsStr += `   - ${name} x${qty}\\n`;
+            });
+            if(addonsStr) msg += `• *Adiciones:*\n${addonsStr}`;
+
+            msg += `\\n• *Domicilio Fijo:* $${COST_DOMICILIO.toLocaleString('es-CO')}\\n`;
+            msg += `• *TOTAL NETO:* ${document.getElementById('totalValue').innerText}\\n\\n`;
+            msg += `📍 *Ubicación del GPS:* ${gpsCoords}`;
+
+            window.open(`https://api.whatsapp.com/send?phone=573238068384&text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        let promptEvent;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault(); promptEvent = e;
+            document.getElementById('pwaBanner').style.display = 'flex';
+        });
+        document.getElementById('pwaBtn').addEventListener('click', () => {
+            if (promptEvent) {
+                promptEvent.prompt();
+                document.getElementById('pwaBanner').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

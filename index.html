@@ -7,7 +7,7 @@
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="manifest.json?v=3">
+    <link rel="manifest" href="manifest.json?v=acid_zone_v4">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,15 +71,10 @@
 
         .container { max-width: 550px; margin: 0 auto; padding: 15px; }
 
-        /* Estructura de Secciones con Fotos Incorporadas */
         .grid-layout {
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
-        }
-
-        @media(min-width: 480px) {
-            .grid-layout { grid-template-columns: 1fr; }
         }
 
         .section-box {
@@ -105,10 +100,10 @@
         }
         .section-header.pink { color: var(--neon-pink); }
 
-        /* Contenedores de Imagen Real del Menú */
+        /* Contenedores de Imagen Local Real */
         .product-image-container {
             width: 100%;
-            height: 220px;
+            height: 240px;
             border-radius: 12px;
             border: 2px solid #222;
             margin-bottom: 15px;
@@ -199,7 +194,6 @@
             width: 32px; height: 32px; border-radius: 50%; border: none;
             background: #222; color: #fff; font-size: 1.2rem; font-weight: bold; cursor: pointer;
         }
-        .btn-ctrl:active { background: var(--acid-purple); }
         .count-num { font-size: 1.1rem; font-weight: 900; min-width: 15px; text-align: center; }
 
         /* Toppings */
@@ -230,7 +224,7 @@
         .total-val { font-family: 'Permanent Marker', cursive; font-size: 1.9rem; color: var(--acid-green); }
 
         .btn-submit {
-            background: #25D366; color: #fff; border: none; padding: 12px 26px;
+            background: #25D366; color: #fff; border: none; padding: 12px 24px;
             border-radius: 25px; font-weight: 900; font-size: 1rem; text-transform: uppercase;
             cursor: pointer; display: flex; align-items: center; gap: 8px;
         }
@@ -273,7 +267,7 @@
                 <div class="section-header"><i class="fa-solid fa-lemon"></i> Frutas Ácidas y Extra Ácidas</div>
                 
                 <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1596515109335-d150f875de4d?auto=format&fit=crop&q=80&w=600" alt="Mix de Kiwi, Fresa y Gomitas">
+                    <img src="combo.jpg" alt="Mix de Frutas y Puestos Acid Zone" onerror="this.style.display='none';">
                 </div>
 
                 <div class="frutas-grid">
@@ -320,7 +314,7 @@
                 <div class="section-header" style="color: var(--acid-yellow);"><i class="fa-solid fa-candy-cane"></i> Gomitas + Frutas Extra Ácidas</div>
                 
                 <div class="product-image-container">
-                    <img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&q=80&w=600" alt="Gomitas Ácidas con Tajín y Limón">
+                    <img src="bolsita.jpg" alt="Gomitas en Bolsita Acid Zone" onerror="this.style.display='none';">
                 </div>
 
                 <div class="selection-row" id="row-bolsita" onclick="toggleBolsitaStandalone()">
@@ -420,7 +414,7 @@
                 );
             }
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js?v=3').then(r => console.log('SW Sincronizado'));
+                navigator.serviceWorker.register('sw.js?v=4').then(r => console.log('SW Sincronizado'));
             }
         });
 

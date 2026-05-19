@@ -1,11 +1,11 @@
 {
-  "name": "Acid Zone App Oficial",
-  "short_name": "AcidZoneApp",
+  "name": "Acid Zone App Menu",
+  "short_name": "AcidZoneV3",
   "description": "Menú interactivo e instalable de Acid Zone Frutas y Gomitas",
-  "start_url": "index.html?v=acidzone_production",
+  "start_url": "index.html?v=acid_zone_v3",
   "display": "standalone",
   "background_color": "#000000",
-  "theme-color": "#0a0a0a",
+  "theme-color": "#000000",
   "orientation": "portrait-primary",
   "icons": [
     {

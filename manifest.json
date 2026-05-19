@@ -1,1 +1,23 @@
+{
+  "name": "Acid Zone Frutas y Gomitas",
+  "short_name": "AcidZone",
+  "description": "Aplicación oficial de pedido instalable de Acid Zone",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme-color": "#0a0a0a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
 

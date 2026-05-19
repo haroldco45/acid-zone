@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ACID ZONE - Menú Interactivo</title>
-    <meta name="theme-color" content="#0a0a0a">
+    <title>ACID ZONE - Menú de Frutas y Gomitas</title>
+    <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json?v=3">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,7 @@
     <style>
         :root {
             --bg-black: #000000;
-            --surface: #0a0a0a;
-            --card-bg: #111111;
+            --surface: #090909;
             --acid-green: #39ff14;
             --neon-pink: #ff007f;
             --neon-purple: #9d00ff;
@@ -31,14 +30,14 @@
 
         header {
             text-align: center;
-            padding: 30px 15px;
-            background: linear-gradient(180deg, rgba(157, 0, 255, 0.15) 0%, transparent 100%);
+            padding: 25px 15px;
+            background: linear-gradient(180deg, rgba(157, 0, 255, 0.2) 0%, transparent 100%);
             border-bottom: 3px dashed var(--acid-green);
         }
 
         .main-title {
             font-family: 'Permanent Marker', cursive;
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: var(--acid-green);
             text-shadow: 4px 4px var(--neon-purple);
             line-height: 1;
@@ -47,8 +46,8 @@
 
         .sub-title {
             font-family: 'Permanent Marker', cursive;
-            font-size: 1.6rem;
-            color: var(--text-light);
+            font-size: 1.5rem;
+            color: #fff;
             margin-top: 5px;
             letter-spacing: 1px;
         }
@@ -57,7 +56,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 15px;
+            margin-top: 12px;
         }
 
         .badge {
@@ -66,19 +65,30 @@
             text-transform: uppercase;
             padding: 4px 10px;
             border-radius: 5px;
-            border: 1px solid var(--text-light);
         }
-        .badge.green { color: var(--acid-green); border-color: var(--acid-green); }
-        .badge.pink { color: var(--neon-pink); border-color: var(--neon-pink); }
+        .badge.green { color: var(--acid-green); border: 1px solid var(--acid-green); }
+        .badge.pink { color: var(--neon-pink); border: 1px solid var(--neon-pink); }
 
         .container { max-width: 550px; margin: 0 auto; padding: 15px; }
 
+        /* Estructura de Secciones con Fotos Incorporadas */
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media(min-width: 480px) {
+            .grid-layout { grid-template-columns: 1fr; }
+        }
+
         .section-box {
             background-color: var(--surface);
-            border: 1px solid #222;
+            border: 1px solid #1a1a1a;
             border-radius: 18px;
             padding: 15px;
-            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
         }
         .section-box.green-accent { border-color: var(--acid-green); }
         .section-box.pink-accent { border-color: var(--neon-pink); }
@@ -95,15 +105,31 @@
         }
         .section-header.pink { color: var(--neon-pink); }
 
+        /* Contenedores de Imagen Real del Menú */
+        .product-image-container {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            border: 2px solid #222;
+            margin-bottom: 15px;
+            overflow: hidden;
+            background-color: #111;
+        }
+        .product-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         /* Lista de Frutas */
-        .frutas-list {
+        .frutas-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 12px;
         }
-        .fruta-tag {
-            background: #151515;
+        .fruta-item {
+            background: #111;
             padding: 10px;
             border-radius: 10px;
             font-size: 0.95rem;
@@ -112,29 +138,29 @@
             align-items: center;
             gap: 8px;
         }
-        .fruta-tag i { color: var(--acid-green); }
+        .fruta-item i { color: var(--acid-green); }
 
         .info-text {
             font-size: 0.85rem;
-            color: #888;
+            color: #aaa;
             line-height: 1.4;
-            border-left: 2px solid var(--acid-green);
+            border-left: 3px solid var(--acid-green);
             padding-left: 8px;
         }
         .info-text span { color: var(--acid-green); font-weight: 700; }
 
-        /* Filas de Selección Interactiva */
+        /* Filas Interactivas */
         .selection-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #161616;
+            background: #111;
             padding: 14px 15px;
             border-radius: 12px;
             margin-bottom: 10px;
             cursor: pointer;
             border: 1px solid transparent;
-            transition: 0.2s;
+            transition: all 0.2s;
         }
         .selection-row.selected {
             border-color: var(--acid-green);
@@ -150,14 +176,13 @@
             align-items: center;
             gap: 12px;
             font-weight: 700;
-            font-size: 1rem;
         }
         .check-item input { accent-color: var(--acid-green); width: 18px; height: 18px; }
 
-        .price-tag { font-family: 'Permanent Marker', cursive; font-size: 1.25rem; color: var(--acid-green); }
+        .price-tag { font-family: 'Permanent Marker', cursive; font-size: 1.3rem; color: var(--acid-green); }
         .price-tag.pink { color: var(--neon-pink); }
 
-        /* Contadores de Adiciones */
+        /* Adiciones */
         .addon-row {
             display: flex;
             justify-content: space-between;
@@ -166,35 +191,35 @@
             border-bottom: 1px dashed #222;
         }
         .addon-row:last-child { border-bottom: none; }
-        .addon-info { display: flex; flex-direction: column; }
         .addon-title { font-weight: 700; font-size: 1rem; }
         .addon-price { font-size: 0.85rem; color: var(--acid-green); font-weight: bold; }
 
         .counter-control { display: flex; align-items: center; gap: 12px; }
         .btn-ctrl {
-            width: 30px; height: 30px; border-radius: 50%; border: none;
-            background: #252525; color: #fff; font-size: 1.1rem; font-weight: bold; cursor: pointer;
+            width: 32px; height: 32px; border-radius: 50%; border: none;
+            background: #222; color: #fff; font-size: 1.2rem; font-weight: bold; cursor: pointer;
         }
+        .btn-ctrl:active { background: var(--acid-purple); }
         .count-num { font-size: 1.1rem; font-weight: 900; min-width: 15px; text-align: center; }
 
-        /* Caja de Toppings */
-        .toppings-box { color: var(--acid-yellow); font-weight: 700; font-size: 0.9rem; line-height: 1.5; }
+        /* Toppings */
+        .toppings-box { color: var(--acid-yellow); font-weight: 700; font-size: 0.95rem; line-height: 1.6; }
 
-        /* Localización */
+        /* GPS Status */
         .geo-indicator {
             background: rgba(157, 0, 255, 0.08);
             border: 1px dashed var(--neon-purple);
             border-radius: 12px;
             padding: 12px;
-            margin-top: 20px;
+            margin-top: 15px;
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 0.85rem;
         }
-        .geo-indicator i { font-size: 1.4rem; color: var(--acid-green); }
+        .geo-indicator i { font-size: 1.5rem; color: var(--acid-green); }
 
-        /* Barra Inferior */
+        /* Checkout Bar */
         .bottom-checkout {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -202,19 +227,16 @@
             padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
             z-index: 100;
         }
-        .total-wrapper { display: flex; flex-direction: column; }
-        .total-lbl { font-size: 0.75rem; text-transform: uppercase; color: #777; font-weight: 700; }
-        .total-val { font-family: 'Permanent Marker', cursive; font-size: 1.8rem; color: var(--acid-green); }
+        .total-val { font-family: 'Permanent Marker', cursive; font-size: 1.9rem; color: var(--acid-green); }
 
         .btn-submit {
-            background: #25D366; color: #fff; border: none; padding: 12px 24px;
+            background: #25D366; color: #fff; border: none; padding: 12px 26px;
             border-radius: 25px; font-weight: 900; font-size: 1rem; text-transform: uppercase;
             cursor: pointer; display: flex; align-items: center; gap: 8px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
 
         footer {
-            text-align: center; padding: 30px 15px; margin-top: 30px;
+            text-align: center; padding: 30px 15px; margin-top: 20px;
             font-size: 0.75rem; color: #444; border-top: 1px solid #111;
         }
         footer b { color: var(--acid-green); }
@@ -245,135 +267,136 @@
     </header>
 
     <div class="container">
-        
-        <div class="section-box green-accent">
-            <div class="section-header"><i class="fa-solid fa-lemon"></i> Frutas Ácidas e Extra Ácidas</div>
-            <div class="frutas-list">
-                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Manzana</div>
-                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Fresa</div>
-                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Kiwi</div>
-                <div class="fruta-tag"><i class="fa-solid fa-circle-check"></i> Uva verde</div>
-                <div class="fruta-tag" style="grid-column: span 2;"><i class="fa-solid fa-circle-check"></i> Guayaba manzana</div>
-            </div>
-            <div class="info-text">
-                Estas frutas se caracterizan por su sabor <span>refrescante y ligeramente ácido</span>, perfectas para snacks deliciosos.
-            </div>
-        </div>
-
-        <div class="section-box pink-accent">
-            <div class="section-header pink"><i class="fa-solid fa-boxes-stacked"></i> Elige tu Combinación</div>
+        <div class="grid-layout">
             
-            <div class="selection-row selected" id="row-c1" onclick="selectCombo('c1', 13000, 'Combo 1 Puesto')">
-                <div class="check-item">
-                    <input type="radio" name="comboGroup" id="c1" checked>
-                    <label for="c1">⭐ 1 PUESTO</label>
+            <div class="section-box green-accent">
+                <div class="section-header"><i class="fa-solid fa-lemon"></i> Frutas Ácidas y Extra Ácidas</div>
+                
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1596515109335-d150f875de4d?auto=format&fit=crop&q=80&w=600" alt="Mix de Kiwi, Fresa y Gomitas">
                 </div>
-                <div class="price-tag">$13.000</div>
+
+                <div class="frutas-grid">
+                    <div class="fruta-item"><i class="fa-solid fa-circle-check"></i> Manzana</div>
+                    <div class="fruta-item"><i class="fa-solid fa-circle-check"></i> Fresa</div>
+                    <div class="fruta-item"><i class="fa-solid fa-circle-check"></i> Kiwi</div>
+                    <div class="fruta-item"><i class="fa-solid fa-circle-check"></i> Uva verde</div>
+                    <div class="fruta-item" style="grid-column: span 2;"><i class="fa-solid fa-circle-check"></i> Guayaba manzana</div>
+                </div>
+                <div class="info-text">
+                    Estas frutas se caracterizan por su sabor <span>refrescante y ligeramente ácido</span>, perfectas para snacks deliciosos.
+                </div>
             </div>
 
-            <div class="selection-row" id="row-c3" onclick="selectCombo('c3', 17000, 'Combo 3 Puestos')">
-                <div class="check-item">
-                    <input type="radio" name="comboGroup" id="c3">
-                    <label for="c3">⭐ 3 PUESTOS</label>
+            <div class="section-box pink-accent">
+                <div class="section-header pink"><i class="fa-solid fa-boxes-stacked"></i> Elige tu Combinación</div>
+                
+                <div class="selection-row selected" id="row-c1" onclick="selectCombo('c1', 13000, 'Combo 1 Puesto')">
+                    <div class="check-item">
+                        <input type="radio" name="comboGroup" id="c1" checked>
+                        <label for="c1">⭐ 1 PUESTO</label>
+                    </div>
+                    <div class="price-tag">$13.000</div>
                 </div>
-                <div class="price-tag">$17.000</div>
+
+                <div class="selection-row" id="row-c3" onclick="selectCombo('c3', 17000, 'Combo 3 Puestos')">
+                    <div class="check-item">
+                        <input type="radio" name="comboGroup" id="c3">
+                        <label for="c3">⭐ 3 PUESTOS</label>
+                    </div>
+                    <div class="price-tag">$17.000</div>
+                </div>
+
+                <div class="selection-row" id="row-c5" onclick="selectCombo('c5', 28000, 'Combo 5 Puestos')">
+                    <div class="check-item">
+                        <input type="radio" name="comboGroup" id="c5">
+                        <label for="c5">⭐ 5 PUESTOS</label>
+                    </div>
+                    <div class="price-tag">$28.000</div>
+                </div>
             </div>
 
-            <div class="selection-row" id="row-c5" onclick="selectCombo('c5', 28000, 'Combo 5 Puestos')">
-                <div class="check-item">
-                    <input type="radio" name="comboGroup" id="c5">
-                    <label for="c5">⭐ 5 PUESTOS</label>
+            <div class="section-box">
+                <div class="section-header" style="color: var(--acid-yellow);"><i class="fa-solid fa-candy-cane"></i> Gomitas + Frutas Extra Ácidas</div>
+                
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1581798459219-318e76aecc7b?auto=format&fit=crop&q=80&w=600" alt="Gomitas Ácidas con Tajín y Limón">
                 </div>
-                <div class="price-tag">$28.000</div>
+
+                <div class="selection-row" id="row-bolsita" onclick="toggleBolsitaStandalone()">
+                    <div class="check-item">
+                        <input type="checkbox" id="bolsitaStandalone">
+                        <label for="bolsitaStandalone">🍓 GOMITAS EN BOLSITA</label>
+                    </div>
+                    <div class="price-tag pink">$7.000</div>
+                </div>
             </div>
+
+            <div class="section-box green-accent">
+                <div class="section-header"><i class="fa-solid fa-circle-plus"></i> Adiciones</div>
+                <div class="addon-row" data-name="Fruta Extra" data-price="2500">
+                    <div class="addon-info">
+                        <span class="addon-title"> Fruta Extra</span>
+                        <span class="addon-price">+$2.500</span>
+                    </div>
+                    <div class="counter-control">
+                        <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                        <span class="count-num">0</span>
+                        <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="addon-row" data-name="Topping Extra" data-price="1500">
+                    <div class="addon-info">
+                        <span class="addon-title"> Topping Extra</span>
+                        <span class="addon-price">+$1.500</span>
+                    </div>
+                    <div class="counter-control">
+                        <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                        <span class="count-num">0</span>
+                        <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                    </div>
+                </div>
+                <div class="addon-row" data-name="Adiciones de Gomitas" data-price="2000">
+                    <div class="addon-info">
+                        <span class="addon-title"> Adiciones de Gomitas</span>
+                        <span class="addon-price">+$2.000</span>
+                    </div>
+                    <div class="counter-control">
+                        <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
+                        <span class="count-num">0</span>
+                        <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-box pink-accent">
+                <div class="section-header pink" style="font-size: 1.1rem;"><i class="fa-solid fa-pepper-hot"></i> Toppings Activos con tus pedidos</div>
+                <div class="toppings-box">
+                    • Tajín / Polvo Ácido <br>
+                    • Limón Extruido <br>
+                    • Salsa de la Casa
+                </div>
+            </div>
+
+            <div class="geo-indicator">
+                <i class="fa-solid fa-location-crosshairs" id="geoIcon"></i>
+                <span id="geoText">Sincronizando coordenadas de entrega...</span>
+            </div>
+
         </div>
-
-        <div class="section-box">
-            <div class="section-header" style="color: var(--acid-yellow);"><i class="fa-solid fa-candy-cane"></i> Gomitas + Frutas Extra Ácidas</div>
-            <div class="selection-row" id="row-bolsita" onclick="toggleBolsitaStandalone()">
-                <div class="check-item">
-                    <input type="checkbox" id="bolsitaStandalone">
-                    <label for="bolsitaStandalone">🍓 GOMITAS EN BOLSITA</label>
-                </div>
-                <div class="price-tag pink">$7.000</div>
-            </div>
-        </div>
-
-        <div class="section-box green-accent">
-            <div class="section-header"><i class="fa-solid fa-circle-plus"></i> Adiciones</div>
-            <div class="addon-row" data-name="Fruta Extra" data-price="2500">
-                <div class="addon-info">
-                    <span class="addon-title">🟢 Fruta Extra</span>
-                    <span class="addon-price">+$2.500</span>
-                </div>
-                <div class="counter-control">
-                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
-                    <span class="count-num">0</span>
-                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
-                </div>
-            </div>
-            <div class="addon-row" data-name="Topping Extra" data-price="1500">
-                <div class="addon-info">
-                    <span class="addon-title">🟢 Topping Extra</span>
-                    <span class="addon-price">+$1.500</span>
-                </div>
-                <div class="counter-control">
-                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
-                    <span class="count-num">0</span>
-                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
-                </div>
-            </div>
-            <div class="addon-row" data-name="Adiciones de Gomitas" data-price="2000">
-                <div class="addon-info">
-                    <span class="addon-title">🟢 Adiciones de Gomitas</span>
-                    <span class="addon-price">+$2.000</span>
-                </div>
-                <div class="counter-control">
-                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
-                    <span class="count-num">0</span>
-                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
-                </div>
-            </div>
-            <div class="addon-row" data-name="Gomitas en Bolsita" data-price="7000">
-                <div class="addon-info">
-                    <span class="addon-title">🟢 Gomitas en Bolsita</span>
-                    <span class="addon-price">+$7.000</span>
-                </div>
-                <div class="counter-control">
-                    <button class="btn-ctrl" onclick="changeAddon(this, -1)">-</button>
-                    <span class="count-num">0</span>
-                    <button class="btn-ctrl" onclick="changeAddon(this, 1)">+</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-box pink-accent">
-            <div class="section-header pink" style="font-size: 1.1rem;"><i class="fa-solid fa-pepper-hot"></i> Toppings Activos con tus pedidos</div>
-            <div class="toppings-box">
-                • Tajín / Polvo Ácido <br>
-                • Limón Extruido <br>
-                • Salsa de la Casa
-            </div>
-        </div>
-
-        <div class="geo-indicator">
-            <i class="fa-solid fa-location-crosshairs" id="geoIcon"></i>
-            <span id="geoText">Sincronizando coordenadas de entrega...</span>
-        </div>
-
     </div>
 
     <div class="bottom-checkout">
-        <div class="total-wrapper">
-            <span class="total-lbl">Total + Domicilio ($3k)</span>
+        <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 0.75rem; text-transform: uppercase; color: #777; font-weight: bold;">Total + Domicilio ($3k)</span>
             <span class="total-val" id="totalValue">$16.000</span>
         </div>
         <button class="btn-submit" onclick="dispatchOrder()"><i class="fa-brands fa-whatsapp"></i> Pedir</button>
     </div>
 
     <footer>
-        <p>Domicilios Oficiales: 323 806 8384 | Tarifa Domicilio: $3.000</p>
-        <p style="margin-top: 8px; font-weight: 700; letter-spacing: 0.3px;">Hecha por VIBRAS POSITIVAS HM</p>
+        <p>Domicilios: 323 806 8384 | Costo Envío: $3.000</p>
+        <p style="margin-top: 8px; font-weight: 700;">Hecha por VIBRAS POSITIVAS HM</p>
         <p>© 2026 Todos los derechos de autor reservados</p>
     </footer>
 
@@ -387,17 +410,17 @@
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     (p) => {
-                        gpsCoords = `https://www.google.com/maps?q=${p.coords.latitude},${p.coords.longitude}`;
+                        gpsCoords = `http://maps.google.com/?q=${p.coords.latitude},${p.coords.longitude}`;
                         document.getElementById('geoIcon').className = "fa-solid fa-location-dot";
-                        document.getElementById('geoText').innerHTML = "<b>Ubicación Geo Vinculada</b> con el despacho de WhatsApp.";
+                        document.getElementById('geoText').innerHTML = "<b>Ubicación Geo Vinculada</b> con éxito.";
                         document.getElementById('geoText').style.color = "#39ff14";
                     },
-                    () => { document.getElementById('geoText').innerText = "Ubicación manual mediante chat de WhatsApp."; },
+                    () => { document.getElementById('geoText').innerText = "Ubicación manual mediante chat."; },
                     { enableHighAccuracy: true }
                 );
             }
             if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('sw.js?v=2').then(r => console.log('SW activo'));
+                navigator.serviceWorker.register('sw.js?v=3').then(r => console.log('SW Sincronizado'));
             }
         });
 
@@ -405,7 +428,6 @@
             document.getElementById(radioId).checked = true;
             comboPrice = price;
             comboSelectedName = name;
-            
             ['row-c1', 'row-c3', 'row-c5'].forEach(id => document.getElementById(id).classList.remove('selected'));
             document.getElementById('row-' + radioId).classList.add('selected');
             updateTotal();
@@ -429,19 +451,15 @@
         function updateTotal() {
             let total = comboPrice;
             if (document.getElementById('bolsitaStandalone').checked) total += 7000;
-
             document.querySelectorAll('.addon-row').forEach(row => {
-                const price = parseInt(row.getAttribute('data-price'));
-                const qty = parseInt(row.querySelector('.count-num').innerText);
-                total += (price * qty);
+                total += parseInt(row.getAttribute('data-price')) * parseInt(row.querySelector('.count-num').innerText);
             });
-
             total += COST_DOMICILIO;
             document.getElementById('totalValue').innerText = "$" + total.toLocaleString('es-CO');
         }
 
         function dispatchOrder() {
-            let msg = "*🧪 NUEVO PEDIDO - ACID ZONE PWA*\\n\\n";
+            let msg = "*🧪 NUEVO PEDIDO - ACID ZONE*\\n\\n";
             msg += `• *Base:* ${comboSelectedName}\\n`;
             if(document.getElementById('bolsitaStandalone').checked) msg += `• *Bolsita Extra:* Sí (+ $7.000)\\n`;
             
@@ -455,7 +473,7 @@
 
             msg += `\\n• *Domicilio Fijo:* $${COST_DOMICILIO.toLocaleString('es-CO')}\\n`;
             msg += `• *TOTAL NETO:* ${document.getElementById('totalValue').innerText}\\n\\n`;
-            msg += `📍 *Ubicación del GPS:* ${gpsCoords}`;
+            msg += `📍 *Ubicación de Entrega:* ${gpsCoords}`;
 
             window.open(`https://api.whatsapp.com/send?phone=573238068384&text=${encodeURIComponent(msg)}`, '_blank');
         }

@@ -1,7 +1,9 @@
-const CACHE_NAME = 'acidzone-cache-v3';
+const CACHE_NAME = 'acidzone-cache-v4';
 const ASSETS = [
   'index.html',
   'manifest.json',
+  'combo.jpg',
+  'bolsita.jpg',
   'https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Urbanist:wght@400;700;900&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
 ];
